@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.websocket.server.PathParam;
 import java.net.URI;
+import java.util.concurrent.ExecutionException;
 
 @RestController
 public class UsuarioController {
@@ -34,12 +35,15 @@ public class UsuarioController {
     }
 
     @GetMapping("/usuario")
-    public ResponseEntity<Usuario> comsultarUsuarioPorNome(@PathParam("nome") String nome) {
+    public ResponseEntity<?> comsultarUsuarioPorNome(@PathParam("nome") String nome) {
 
-
-        Usuario usuario = service.consultarPorNome(nome);
-        ResponseEntity<Usuario> usuarioResponse = ResponseEntity.ok(usuario);
-        return usuarioResponse;
+        try {
+            Usuario usuario = service.consultarPorNome(nome);
+            ResponseEntity<Usuario> usuarioResponse = ResponseEntity.ok(usuario);
+            return usuarioResponse;
+        }catch (RuntimeException e){
+            throw new UsuarioNaoEncontradoExeption("usuario nao encontrado");
+        }
 
 
     }
