@@ -3,6 +3,7 @@ package br.com.cielo.bddCielo.rest;
 import br.com.cielo.bddCielo.entities.Usuario;
 import br.com.cielo.bddCielo.exeptions.UsuarioNaoEncontradoExeption;
 import br.com.cielo.bddCielo.services.UsuarioService;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,9 +15,10 @@ import java.net.URI;
 import java.util.concurrent.ExecutionException;
 
 @RestController
+@AllArgsConstructor
 public class UsuarioController {
-    @Autowired
-    UsuarioService service;
+
+    private final UsuarioService service;
 
     @PostMapping("/criarusuario")
     public ResponseEntity<Usuario> criarUsuario(@RequestBody Usuario usuario) {

@@ -5,14 +5,16 @@ import br.com.cielo.bddCielo.exeptions.UsuarioNaoEncontradoExeption;
 import br.com.cielo.bddCielo.useCases.ConsultarUsuarioPorIdUseCase;
 import br.com.cielo.bddCielo.useCases.ConsultarUsuarioPorNomeUseCase;
 import br.com.cielo.bddCielo.useCases.SalvarUsuarioUseCase;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 @Service
+@AllArgsConstructor
 public class UsuarioService {
-    @Autowired
-    SalvarUsuarioUseCase salvarUsuario;
+
+    private final SalvarUsuarioUseCase salvarUsuario;
 
     @Autowired
     ConsultarUsuarioPorNomeUseCase consularPorNome;
