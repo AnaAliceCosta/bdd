@@ -4,7 +4,8 @@ import org.junit.runner.RunWith;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(
-
+        plugin = {"pretty", "html:target/build/reports/feature.html"},
+        features = {"classpath:features"}
 )
 public class RunTest {
 }
