@@ -7,8 +7,6 @@ import io.cucumber.java.Before;
 import io.cucumber.java.pt.Dado;
 import io.cucumber.java.pt.Entao;
 import io.cucumber.java.pt.Quando;
-import org.junit.Rule;
-import org.junit.rules.ExpectedException;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -18,6 +16,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class PropondoLancesSteps {
     private Leilao leilao;
     private ArrayList<Lance> lances;
+    private Exception erroOcorrido;
 
     @Before
     public void setup() {
@@ -39,19 +38,21 @@ public class PropondoLancesSteps {
         assertEquals(1,leilao.getLances().size());
         assertEquals(lances.get(0).getValor(),leilao.getLances().get(0).getValor());
     }
-
-    @Dado("um lace inválido de {double} reais do usuario {string}")
-    public void um_lace_inválido_de_reais_do_usuario(Double valor, String nomeUsuario) {
-        Usuario usuario = new Usuario(nomeUsuario);
-        expectedEx.expect(IllegalArgumentException.class);
-        Lance lance = new Lance(usuario,new BigDecimal(valor));
-        lances.add(lance);
+    @Entao("o lance não é aceito")
+    public void o_lance_não_é_aceito() {
+        assertEquals(IllegalArgumentException.class,erroOcorrido.getClass());
     }
+
     @Dado("um lace de {double} reais do usuario {string}")
     public void um_lace_de_reais_do_usuario(Double valor, String nomeUsuario) {
-        Usuario usuario = new Usuario(nomeUsuario);
-        Lance lance = new Lance(usuario,new BigDecimal(valor));
-        lances.add(lance);
+        try {
+            Usuario usuario = new Usuario(nomeUsuario);
+            Lance lance = new Lance(usuario, new BigDecimal(valor));
+            lances.add(lance);
+        } catch (IllegalArgumentException e){
+            erroOcorrido = e;
+
+        }
 
     }
 
@@ -68,9 +69,4 @@ public class PropondoLancesSteps {
         assertEquals(lances.get(1).getValor(),leilao.getLances().get(1).getValor());
     }
 
-
-
-
-    @Rule
-    public ExpectedException expectedEx = ExpectedException.none();
 }

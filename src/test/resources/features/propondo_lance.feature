@@ -15,15 +15,15 @@ Funcionalidade: Testes de leilao
     |10.0 | fulano |
     |15.0 | fulano |
 
-#  Esquema do Cenario: Propondo varios lances invalidos
-#    Dado um lace inválido de <valor> reais do usuario '<usuario>'
-#    Quando propoe um lance
-#    Entao o lance é aceito
-#
-#    Cenarios:
-#      |valor|usuario |
-#      |0.0  | fulano |
-#      |-1.0 | fulano |
+  Esquema do Cenario: Propondo varios lances invalidos
+    Dado um lace de <valor> reais do usuario '<usuario>'
+    Quando propoe um lance
+    Entao o lance não é aceito
+
+    Cenarios:
+      |valor|usuario |
+      |0.0  | fulano |
+      |-1.0 | fulano |
 
 
 
