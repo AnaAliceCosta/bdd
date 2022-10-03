@@ -1,5 +1,5 @@
-#language:pt
-Funcionalidade: Testes de leilao
+# language: pt
+Funcionalidade: Validar leilão 
 
   Cenario: Propondo varios lances validos em um mesmo leilao
     Dados um lace de 10.0 reais do usuario "Fulano"

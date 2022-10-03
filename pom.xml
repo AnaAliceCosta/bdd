@@ -19,6 +19,9 @@
 		<cucumber.version>6.2.0</cucumber.version>
 		<maven.compiler.version>3.8.1</maven.compiler.version>
 		<maven.surefire.version>2.22.1</maven.surefire.version>
+		<allure.cmd.download.url>
+            https://repo.maven.apache.org/maven2/io/qameta/allure/allure-commandline
+        </allure.cmd.download.url>
 		<java.version>1.8</java.version>
 	</properties>
 
@@ -139,6 +142,12 @@
 		    <scope>test</scope>
 		</dependency>
 
+<dependency>
+    <groupId>io.qameta.allure</groupId>
+    <artifactId>allure-junit5</artifactId>
+    <version>2.19.0</version>
+    <scope>test</scope>
+</dependency>
 
 
 	</dependencies>
@@ -161,9 +170,6 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
-				<configuration>
-					<skipTests>true</skipTests>
-    			</configuration>
 				<executions>
 					<execution>
 						<id>unit-tests</id>
@@ -186,29 +192,16 @@
 				</executions>
 			</plugin>
 			<plugin>
-		        <groupId>org.apache.maven.plugins</groupId>
-		        <artifactId>maven-failsafe-plugin</artifactId>
-		        <executions>
-		          <execution>
-						<id>integration-tests</id>
-						<phase>integration-test</phase>
-						<goals>
-							<goal>integration-test</goal>
-						</goals>
-						<configuration>
-							<skipTests>false</skipTests>
-							<includes>
-								<include>**/*Test.java</include>
-							</includes>
-							<excludes>
-								<exclude>br.com.alura.leilao.model.*Test</exclude>
-								<exclude>br.com.alura.leilao.e2e.acceptance.*Test</exclude>
-								<exclude>br.com.alura.leilao.e2e.selenium.*Test</exclude>
-							</excludes>
-						</configuration>
-					</execution>
-		        </executions>
-		      </plugin>
+                <groupId>io.qameta.allure</groupId>
+                <artifactId>allure-maven</artifactId>
+                <version>2.10.0</version>
+                <configuration>
+                    <reportVersion>2.18.1</reportVersion>
+                    <allureDownloadUrl>
+                        ${allure.cmd.download.url}/2.18.1/allure-commandline-2.18.1.zip
+                    </allureDownloadUrl>
+                </configuration>
+            </plugin>
 		</plugins>
 	</build>
 
