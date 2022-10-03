@@ -3,6 +3,7 @@ package acceptance.steps;
 import br.com.alura.leilao.model.Lance;
 import br.com.alura.leilao.model.Leilao;
 import br.com.alura.leilao.model.Usuario;
+import io.cucumber.datatable.DataTable;
 import io.cucumber.java.Before;
 import io.cucumber.java.pt.Dado;
 import io.cucumber.java.pt.Entao;
@@ -10,6 +11,8 @@ import io.cucumber.java.pt.Quando;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -55,6 +58,28 @@ public class PropondoLancesSteps {
         }
 
     }
+
+    @Dado("os lances abaixo")
+    public void os_lances_abaixo(DataTable dataTable) {
+        // Write code here that turns the phrase above into concrete actions
+        // For automatic transformation, change DataTable to one of
+        // E, List<E>, List<List<E>>, List<Map<K,V>>, Map<K,V> or
+        // Map<K, List<V>>. E,K,V must be a String, Integer, Float,
+        // Double, Byte, Short, Long, BigInteger or BigDecimal.
+        //
+        // For other transformations you can register a DataTableType.
+
+        List<Map<String, String>> valores = dataTable.asMaps();
+        for (Map<String, String> mapa : valores) {
+            String usuario = mapa.get("usuario");
+            String valor = mapa.get("valor");
+            Lance lance = new Lance(new Usuario(usuario),new BigDecimal(valor));
+            lances.add(lance);
+
+        }
+
+    }
+
 
     @Quando("popoe varios lances")
     public void popoe_varios_lances() {

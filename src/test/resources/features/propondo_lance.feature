@@ -6,6 +6,15 @@ Funcionalidade: Testes de leilao
     Quando popoe varios lances
     Entao os lances sao aceitos
 
+
+  Cenario: Propondo varios lances validos usndo dataTable
+    Dado os lances abaixo
+    | valor | usuario |
+    | 10.0  | fuladno |
+    | 15.0  | beltrano|
+    Quando popoe varios lances
+    Entao os lances sao aceitos
+
   Esquema do Cenario: Propondo varios lances validos
     Dado um lace de <valor> reais do usuario '<usuario>'
     Quando propoe um lance
