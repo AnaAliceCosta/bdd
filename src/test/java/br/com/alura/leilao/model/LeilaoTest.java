@@ -4,10 +4,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.math.BigDecimal;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
+@DisplayName("Gerenciar lances dos leiloes")
 public class LeilaoTest {
-	
+	@DisplayName("deve ser possivel dar um lance, quando um leilao já existir")
 	@Test
     public void deveReceberUmLance() {
         Leilao leilao = new Leilao("Macbook Pro 15");
