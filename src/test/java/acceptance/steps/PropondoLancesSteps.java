@@ -8,6 +8,9 @@ import io.cucumber.java.Before;
 import io.cucumber.java.pt.Dado;
 import io.cucumber.java.pt.Entao;
 import io.cucumber.java.pt.Quando;
+import org.assertj.core.api.Assertions;
+
+import static org.assertj.core.api.Assertions.*;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -23,7 +26,7 @@ public class PropondoLancesSteps {
 
     @Before
     public void setup() {
-        this.lances = new ArrayList<Lance>();
+        this.lances = new ArrayList<>();
         this.leilao = new Leilao("tablet XPTO");
     }
     @Dado("um lance valido")
@@ -39,13 +42,22 @@ public class PropondoLancesSteps {
     }
     @Entao("o lance é aceito")
     public void o_lance_eh_aceito() {
-        assertEquals(1,leilao.getLances().size());
-        assertEquals(lances.get(0).getValor(),leilao.getLances().get(0).getValor());
+//        assertEquals(1,leilao.getLances().size());
+//        assertEquals(lances.get(0).getValor(),leilao.getLances().get(0).getValor());
 
+        int lanceAtual = 1;
+        int quantidadeDeLances = leilao.getLances().size();
+
+        BigDecimal valorAtualDoLance = lances.get(0).getValor();
+        BigDecimal valorEsperadoDoLance = leilao.getLances().get(0).getValor();
+
+        assertThat(lanceAtual).isEqualTo(quantidadeDeLances);
+        assertThat(valorAtualDoLance).isEqualTo(valorEsperadoDoLance);
     }
     @Entao("o lance não é aceito")
     public void o_lance_não_é_aceito() {
-        assertEquals(IllegalArgumentException.class,erroOcorrido.getClass());
+        //assertEquals(IllegalArgumentException.class,erroOcorrido.getClass());
+        assertThatExceptionOfType(IllegalArgumentException.class).equals(erroOcorrido.getClass());
     }
 
     @Dado("um lace de {double} reais do usuario {string}")
