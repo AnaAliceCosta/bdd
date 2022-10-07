@@ -8,7 +8,7 @@ import org.junit.runner.RunWith;
 @CucumberOptions(
         features = "classpath:features",
         plugin = {"pretty", "html:target/build/reports/feature.html"},
-        tags = "@Sanidade"
+        tags = "@sanidade"
 )
 public class LeilaoCucumberRunnerTest {
 
